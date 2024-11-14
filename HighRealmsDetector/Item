@@ -55,7 +55,8 @@ local sections = {
 	Effects = "CommonModules.DefinitionModules.Effects.DefinitionModules",
 	Mob = "CommonModules.DefinitionModules.Block.DefinitionModules.Blocks.Mob",
 	Buckets = "CommonModules.DefinitionModules.Tool.DefinitionModules.Buckets",
-	Rods = "CommonModules.DefinitionModules.Tool.DefinitionModules.Rods"
+	Rods = "CommonModules.DefinitionModules.Tool.DefinitionModules.Rods",
+Fish = "CommonModules.DefinitionModules.Food.DefinitionModules.Fish"
 
  }
 
@@ -67,7 +68,7 @@ local knownItems = {
         "Wood Hoe"
     },
     Misc = {
-        "Player Pickaxe", "Joke Axe", "Grave Digger Shovel", "Trick or Treat Bag"
+        "Player Pickaxe", "Joke Axe", "Grave Digger Shovel", "Trick or Treat Bag", "Treasure Chest"
     },
     Pickaxe = {
         "Wood Pickaxe", "Cobalt Pickaxe", "Stone Pickaxe", "Iron Pickaxe", "Gold Pickaxe", "Copper Pickaxe", "Diamond Pickaxe"
@@ -76,7 +77,7 @@ local knownItems = {
         "Iron Scythe", "Gold Scythe"
     },
     Swords = {
-        "Bone Sword", "Clockwork Sword", "Cobalt Sword", "Copper Sword", "Gold Sword", "Inferno Sword", "Iron Sword", "Slime Sword", "Stone Sword", "Twilight Sword", "Wood Sword", "Dev Sword", "Diamond Sword", "Diamond Knife", "Diamond Hammer"
+        "Bone Sword", "Clockwork Sword", "Cobalt Sword", "Copper Sword", "Gold Sword", "Inferno Sword", "Iron Sword", "Slime Sword", "Stone Sword", "Twilight Sword", "Wood Sword", "Dev Sword", "Diamond Sword", "Diamond Knife", "Diamond Hammer", "Trident"
     },
     Food = {
         "Carrot", "Corn", "White Mushroom", "Red Potato", "Tomato", "Strawberry", "Watermelon", "Wheat", "Pumpkin", "Nightshade Berry"
@@ -85,10 +86,10 @@ local knownItems = {
         "Void Shard", "Black Dye", "Blue Dye", "Spring", "Twilight Blade", "Bones", "Skull", "Skeleton Key", "Silver", "Cog", "Coal", "Basalt", "Molten Core", "Inferno Essence", "Light Source", "Scrap Metal", "Flame", "Copper", "Cobalt", "Elastic Essence", "Yellow Dye", "Stone", "Necrotic Essence", "Gold", "Green Dye", "Green Goo", "Green Slime Core", "Iron", "Magnet Shard", "Marble", "Twilight Essence", "White Dye", "Rage Essence", "Realm Key", "Recycled Blade", "Red Dye", "Clay", "Cloth", "Mystic Iron Fragment", "Mystic Gold Fragment", "Mystic Diamond Fragment", "Diamond", "Blue Flame", "Rainbow Dye", "Barbed Arachnella Hair", "Venom Gland", "Arachnella Fang", "Granite", "Arachnella Heart", "Spider Silk", "Limestone"
     },
     Store = {
-        "Theme Pink", "Dragon Storage Chest Product", "Pro Backpack", "Island Expansion", "5,000 Coins Pack", "100,000 Coins Pack", "25,000 Coins Pack", "Island Flight", "Theme Storm", "Theme Crimson", "Theme Ancient", "1,000 Coins Pack", "Theme Obby", "Healing Potion III", "Damage Boost Potion III", "Jump Power Potion III", "Trick or Treat Bags", "Luck Potion III", "Theme Halloween 2024", "Theme Blackhole", "XP Boost Potion III", "Coin Boost Potion III"
+        "Theme Pink", "Dragon Storage Chest Product", "Pro Backpack", "Island Expansion", "5,000 Coins Pack", "100,000 Coins Pack", "25,000 Coins Pack", "Island Flight", "Theme Storm", "Theme Crimson", "Theme Ancient", "1,000 Coins Pack", "Theme Obby", "Healing Potion III", "Damage Boost Potion III", "Jump Power Potion III", "Trick or Treat Bags", "Luck Potion III", "Theme Halloween 2024", "Theme Blackhole", "XP Boost Potion III", "Coin Boost Potion III", "Theme Aqua"
 		 },
     Block = {
-        "Grass", "Dirt", "Stone Block", "Marble Brick Block", "Silver Block", "Bedrock", "Basalt Block", "Cobblestone", "Marble Block", "Pink Stone Brick Block", "Lantern Block", "SpiderWeb", "Slime Block", "Ladder", "Tilled Dirt", "Torch", "Pink Grass", "Coal Block", "Cobalt Block", "Copper Block", "Fire Block", "Gold Block", "Iron Block", "Grass Weed", "Vines", "Wood Table", "Wooden Crate", "Wall Torch", "Danger Sign", "Electric FX Block", "Fog FX Block", "Rain FX Block", "Crimson Ornate Block", "Sword Throne", "Crimson Grass Block", "Crimson Moss Block", "Jungle Vines", "Jungle Grass Block", "Jungle Moss Block", "Tiki Head Block", "Tiki Pole Block", "Basalt Slab", "Stone Brick Block", "Red Brick Block", "Red Brick Slab", "Hay Bale", "Red Brick Vertical Slab", "Basalt Vertical Slab", "Spotlight", "Candles", "Hanging Lantern", "Wood Chair", "Wood Barrel", "Workbench", "Blue Wall Torch", "Orange Lightcube", "Green Lightcube", "Mushroom Block", "Yellow Lightcube", "Purple Lightcube", "Blue Torch", "Chain", "Diamond Block", "Blue Lightcube", "Mushroom", "Red Lightcube", "Rainbow Block", "Web Grass Path Block", "Mud Block", "Coffin Bed", "Ghost FX Block", "Limestone Block", "Jumpscare Block", "Watermelon Block", "Web Grass Block", "Marble Pillar Base", "Gargoyle Statue", "Pumpkin Block", "Marble Pillar", "Log", "Glowstone Block", "Toxic Sludge", "Jack O Lantern", "Spawn Block", "Granite Block", "Swamp Block", "Candelabra", "Cursed Relic", "Grave Headstone", "Lichen", "Peat Moss Block", "Water"
+        "Grass", "Dirt", "Stone Block", "Marble Brick Block", "Silver Block", "Bedrock", "Basalt Block", "Cobblestone", "Marble Block", "Pink Stone Brick Block", "Lantern Block", "SpiderWeb", "Slime Block", "Ladder", "Tilled Dirt", "Torch", "Pink Grass", "Coal Block", "Cobalt Block", "Copper Block", "Fire Block", "Gold Block", "Iron Block", "Grass Weed", "Vines", "Wood Table", "Wooden Crate", "Wall Torch", "Danger Sign", "Electric FX Block", "Fog FX Block", "Rain FX Block", "Crimson Ornate Block", "Sword Throne", "Crimson Grass Block", "Crimson Moss Block", "Jungle Vines", "Jungle Grass Block", "Jungle Moss Block", "Tiki Head Block", "Tiki Pole Block", "Basalt Slab", "Stone Brick Block", "Red Brick Block", "Red Brick Slab", "Hay Bale", "Red Brick Vertical Slab", "Basalt Vertical Slab", "Spotlight", "Candles", "Hanging Lantern", "Wood Chair", "Wood Barrel", "Workbench", "Blue Wall Torch", "Orange Lightcube", "Green Lightcube", "Mushroom Block", "Yellow Lightcube", "Purple Lightcube", "Blue Torch", "Chain", "Diamond Block", "Blue Lightcube", "Mushroom", "Red Lightcube", "Rainbow Block", "Web Grass Path Block", "Mud Block", "Coffin Bed", "Ghost FX Block", "Limestone Block", "Jumpscare Block", "Watermelon Block", "Web Grass Block", "Marble Pillar Base", "Gargoyle Statue", "Pumpkin Block", "Marble Pillar", "Log", "Glowstone Block", "Toxic Sludge", "Jack O Lantern", "Spawn Block", "Granite Block", "Swamp Block", "Candelabra", "Cursed Relic", "Grave Headstone", "Lichen", "Peat Moss Block", "Water", "No Swimming Sign", "Waterfall FX Block", "Bubble FX Block", "Spider Portrait", "No Fishing Sign"
     },
     Chests = {
         "Dragonstone Chest", "Large Chest", "Small Chest", "Diamond Chest"
@@ -118,10 +119,10 @@ local knownItems = {
 		"Ash Fence", "Cherry Fence", "DarkHollow Fence", "Mahogany Fence", "Oak Fence", "Stone Fence", "StoneBrick Fence", "Web Fence", "Bone Fence"
     },
     Flowers = {
-        "Pink Potted Flower", "Green Poppy Flower", "Yellow Poppy Flower", "White Poppy Flower", "Yellow Potted Flower", "Blue Poppy Flower", "Blue Potted Flower", "White Potted Flower", "Red Potted Flower", "Purple Potted Flower", "Red Poppy Flower", "Cyan Potted Flower", "Black Poppy Flower", "Rainbow Poppy Flower", "Mire Lotus"
+        "Pink Potted Flower", "Green Poppy Flower", "Yellow Poppy Flower", "White Poppy Flower", "Yellow Potted Flower", "Blue Poppy Flower", "Blue Potted Flower", "White Potted Flower", "Red Potted Flower", "Purple Potted Flower", "Red Poppy Flower", "Cyan Potted Flower", "Black Poppy Flower", "Rainbow Poppy Flower", "Mire Lotus", "Orange Coral", "Seaweed", "Red Coral", "Purple Coral", "Scallop Shell", "Deep Seaweed", "Starfish Shell", "Nautilus Shell", "Jingle Shell", "Branch Coral", "Blue Coral"
     },
     Furniture = {
-        "Wood Stool", "Teal Table Lamp", "Red Bed", "Campfire", "Yellow Bed", "Tumbler", "Blue Bed", "Red Table Lamp", "Light Blue Bed", "Teal Luxury Sofa", "Black Bed", "Purple Bed", "Brown Bed", "Sofa Section Corner", "Tall Lamp", "Gold Table Lamp", "Large Umbrella", "Sofa Section Basic", "Lime Bed", "Sofa Section", "Cyan Bed", "Nightstand", "Orange Bed", "Pink Bed", "Plate Set", "Red Royal Bed", "Metal Grate", "Mug", "Grey Table Lamp", "Bookcase", "Green Bed"
+        "Wood Stool", "Teal Table Lamp", "Red Bed", "Campfire", "Yellow Bed", "Tumbler", "Blue Bed", "Red Table Lamp", "Light Blue Bed", "Teal Luxury Sofa", "Black Bed", "Purple Bed", "Brown Bed", "Sofa Section Corner", "Tall Lamp", "Gold Table Lamp", "Large Umbrella", "Sofa Section Basic", "Lime Bed", "Sofa Section", "Cyan Bed", "Nightstand", "Orange Bed", "Pink Bed", "Plate Set", "Red Royal Bed", "Metal Grate", "Mug", "Grey Table Lamp", "Bookcase", "Green Bed", "Ship Anchor", "Ship Wheel"
     },
     Glass = {
         "Glass Brown", "Glass", "Glass Pink", "Glass Lime", "Glass Black", "Glass Red", "Glass White", "Glass Green", "Glass Cyan", "Glass Yellow", "Glass Light Blue", "Glass Blue", "Glass Purple", "Glass Orange"
@@ -166,7 +167,10 @@ local knownItems = {
 		"Bucket", "Water Bucket"
 	},
 	Rods = {
-		"Ash Fishing Rod", "Oak Fishing Rod"
+		"Basic Fishing Rod", "Reinforced Fishing Rod"
+	},
+	Fish = {
+		"Crayfish", "Tilapia", "Tiger Shark", "Carp", "King Salmon", "Marlin", "Mudskipper", "Shrimp", "Leech"
 	}
 }
 
