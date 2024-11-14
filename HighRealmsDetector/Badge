@@ -30,7 +30,9 @@ local knownBadges = {
 "Reached Darkfang Mire",
 "Arachnella",
 "Farlight Crystals Mire",
-"I like Potatoes"
+"I like Potatoes",
+"Spider Killer",
+"Secret Obby"
     }
 }
 
