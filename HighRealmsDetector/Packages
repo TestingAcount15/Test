@@ -1,1 +1,100 @@
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local packages = replicatedStorage:WaitForChild("Packages")
 
+local knownPaths = {
+"Packages", "Packages.Comm", "Packages.Component", "Packages.EnumList", "Packages.Input", "Packages.Option", "Packages.Promise", "Packages.Signal", "Packages.Streamable", "Packages.TableUtil", "Packages.Timer", "Packages.Trove", "Packages.SimplePath", "Packages.Knit", "Packages.Knit.KnitClient", "Packages.Knit.Services", "Packages.Knit.Services.InventoryService", "Packages.Knit.Services.InventoryService.RF", "Packages.Knit.Services.InventoryService.RF.ClaimMail", "Packages.Knit.Services.InventoryService.RF.SendMail", "Packages.Knit.Services.InventoryService.RF.GetInventory", "Packages.Knit.Services.InventoryService.RF.GetInventorySpace", "Packages.Knit.Services.InventoryService.RF.Sell", "Packages.Knit.Services.InventoryService.RF.EquipItem", "Packages.Knit.Services.InventoryService.RF.GetMail", "Packages.Knit.Services.InventoryService.RF.SwapInventoryIndexes", "Packages.Knit.Services.InventoryService.RF.GetStorages", "Packages.Knit.Services.InventoryService.RF.GetStorageData", "Packages.Knit.Services.InventoryService.RF.Craft", "Packages.Knit.Services.InventoryService.RF.Buy", "Packages.Knit.Services.InventoryService.RE", "Packages.Knit.Services.InventoryService.RE.ItemCollected", "Packages.Knit.Services.InventoryService.RE.InventorySpaceUpdate", "Packages.Knit.Services.InventoryService.RE.StorageUpdate", "Packages.Knit.Services.InventoryService.RE.InventoryUpdate", "Packages.Knit.Services.InventoryService.RE.UpdateMail", "Packages.Knit.Services.InventoryService.RE.StorageAdded", "Packages.Knit.Services.InventoryService.RE.RareItem", "Packages.Knit.Services.DataHandlerService", "Packages.Knit.Services.DataHandlerService.RE", "Packages.Knit.Services.DataHandlerService.RE.ChatMessage", "Packages.Knit.Services.PlayerService", "Packages.Knit.Services.PlayerService.RE", "Packages.Knit.Services.PlayerService.RE.ItemUnlock", "Packages.Knit.Services.PlayerService.RE.CoinsUpdated", "Packages.Knit.Services.PlayerService.RE.BadgeEquipped", "Packages.Knit.Services.PlayerService.RE.RareItemEarned", "Packages.Knit.Services.PlayerService.RE.UpdateMasteries", "Packages.Knit.Services.PlayerService.RE.Teleporting", "Packages.Knit.Services.PlayerService.RE.Warn", "Packages.Knit.Services.PlayerService.RE.BadgeEarned", "Packages.Knit.Services.PlayerService.RE.CaughtFish", "Packages.Knit.Services.PlayerService.RE.PlayerJoined", "Packages.Knit.Services.PlayerService.RE.CollabBuildToggle", "Packages.Knit.Services.PlayerService.RF", "Packages.Knit.Services.PlayerService.RF.MasteryLevelUpFX", "Packages.Knit.Services.PlayerService.RF.GetMasteries", "Packages.Knit.Services.PlayerService.RF.UpdateIslandOption", "Packages.Knit.Services.PlayerService.RF.GetEffects", "Packages.Knit.Services.PlayerService.RF.GetEquippedAchievement", "Packages.Knit.Services.PlayerService.RF.CosmeticChange", "Packages.Knit.Services.PlayerService.RF.GetCoins", "Packages.Knit.Services.PlayerService.RF.RequestToFish", "Packages.Knit.Services.PlayerService.RF.EatFood", "Packages.Knit.Services.PlayerService.RF.EquipAchievement", "Packages.Knit.Services.PlayerService.RF.GameHasUpdated", "Packages.Knit.Services.PlayerService.RF.TogglePlayerTitle", "Packages.Knit.Services.PlayerService.RF.ShowPlayerTutorial", "Packages.Knit.Services.PlayerService.RF.ToolUsed", "Packages.Knit.Services.PlayerService.RF.RequestRespawn", "Packages.Knit.Services.PlayerService.RF.GetSettings", "Packages.Knit.Services.PlayerService.RF.GetIslandOptions", "Packages.Knit.Services.PlayerService.RF.LevelUpFX", "Packages.Knit.Services.PlayerService.RF.DrinkPotion", "Packages.Knit.Services.PlayerService.RF.Dash", "Packages.Knit.Services.PlayerService.RF.UpdateAudio", "Packages.Knit.Services.PlayerService.RF.ToggleChatNotifcations", "Packages.Knit.Services.BlockService", "Packages.Knit.Services.BlockService.RE", "Packages.Knit.Services.BlockService.RE.UpdateClientBlocks", "Packages.Knit.Services.BlockService.RE.IslandBlockUpdater", "Packages.Knit.Services.BlockService.RE.UpdateBlockObject", "Packages.Knit.Services.BlockService.RE.UpdateBlockHealth", "Packages.Knit.Services.BlockService.RE.PlaceClientBlocks", "Packages.Knit.Services.BlockService.RE.UpdateClientMainHub", "Packages.Knit.Services.BlockService.RE.DestroyClientBlocks", "Packages.Knit.Services.BlockService.RF", "Packages.Knit.Services.BlockService.RF.GetBlocks", "Packages.Knit.Services.BlockService.RF.IsOnAcceptanceList", "Packages.Knit.Services.BlockService.RF.DamageBlock", "Packages.Knit.Services.BlockService.RF.GetBlockHealth", "Packages.Knit.Services.BlockService.RF.PlaceBlock", "Packages.Knit.Services.BlockService.RF.GetIslandOwner", "Packages.Knit.Services.MobService", "Packages.Knit.Services.MobService.RF", "Packages.Knit.Services.MobService.RF.GetUnderlingFromIndex", "Packages.Knit.Services.MobService.RF.AttackMobs", "Packages.Knit.Services.MobService.RF.GetCamps", "Packages.Knit.Services.MobService.RE", "Packages.Knit.Services.MobService.RE.UpdateClientCamps", "Packages.Knit.Services.MarketService", "Packages.Knit.Services.MarketService.RF", "Packages.Knit.Services.MarketService.RF.GiftItem", "Packages.Knit.Services.MarketService.RF.GetPasses", "Packages.Knit.Services.MarketService.RF.PurchaseItem", "Packages.Knit.Services.MarketService.RF.OpenedShop", "Packages.Knit.Services.MarketService.RF.HasOpenedShop", "Packages.Knit.Services.MarketService.RF.GetCosmetics", "Packages.Knit.Services.MarketService.RE", "Packages.Knit.Services.MarketService.RE.GiftNotif", "Packages.Knit.Services.MarketService.RE.CosmeticsUpdated", "Packages.Knit.Services.MarketService.RE.InventorySpace", "Packages.Knit.Services.TaskService", "Packages.Knit.Services.TaskService.RE", "Packages.Knit.Services.TaskService.RE.Subtask", "Packages.Knit.Services.TaskService.RE.UpdateTask", "Packages.Knit.Services.TaskService.RE.NewTask", "Packages.Knit.Services.TaskService.RE.StatsUpdated", "Packages.Knit.Services.TaskService.RF", "Packages.Knit.Services.TaskService.RF.GetStats", "Packages.Knit.Services.TaskService.RF.GetTasks", "Packages.Knit.Services.EffectService", "Packages.Knit.Services.EffectService.RE", "Packages.Knit.Services.EffectService.RE.UpdateEffect", "Packages._Index", "Packages._Index.evaera_promise@4.0.0", "Packages._Index.evaera_promise@4.0.0.promise", "Packages._Index.evaera_promise@4.0.0.promise.init.spec", "Packages._Index.sleitnick_comm@0.3.1", "Packages._Index.sleitnick_comm@0.3.1.Option", "Packages._Index.sleitnick_comm@0.3.1.Promise", "Packages._Index.sleitnick_comm@0.3.1.Signal", "Packages._Index.sleitnick_comm@0.3.1.comm", "Packages._Index.sleitnick_comm@0.3.1.comm.Client", "Packages._Index.sleitnick_comm@0.3.1.comm.Client.ClientComm", "Packages._Index.sleitnick_comm@0.3.1.comm.Client.ClientRemoteProperty", "Packages._Index.sleitnick_comm@0.3.1.comm.Client.ClientRemoteSignal", "Packages._Index.sleitnick_comm@0.3.1.comm.Server", "Packages._Index.sleitnick_comm@0.3.1.comm.Server.RemoteProperty", "Packages._Index.sleitnick_comm@0.3.1.comm.Server.RemoteSignal", "Packages._Index.sleitnick_comm@0.3.1.comm.Server.ServerComm", "Packages._Index.sleitnick_comm@0.3.1.comm.Types", "Packages._Index.sleitnick_comm@0.3.1.comm.Util", "Packages._Index.sleitnick_component@2.4.6", "Packages._Index.sleitnick_component@2.4.6.Promise", "Packages._Index.sleitnick_component@2.4.6.Signal", "Packages._Index.sleitnick_component@2.4.6.Symbol", "Packages._Index.sleitnick_component@2.4.6.Trove", "Packages._Index.sleitnick_component@2.4.6.component", "Packages._Index.sleitnick_component@2.4.6.component.init.spec", "Packages._Index.sleitnick_enum-list@2.0.1", "Packages._Index.sleitnick_enum-list@2.0.1.enum-list", "Packages._Index.sleitnick_enum-list@2.0.1.enum-list.init.spec", "Packages._Index.sleitnick_input@2.1.1", "Packages._Index.sleitnick_input@2.1.1.Signal", "Packages._Index.sleitnick_input@2.1.1.Trove", "Packages._Index.sleitnick_input@2.1.1.input", "Packages._Index.sleitnick_input@2.1.1.input.Gamepad", "Packages._Index.sleitnick_input@2.1.1.input.Keyboard", "Packages._Index.sleitnick_input@2.1.1.input.Mouse", "Packages._Index.sleitnick_input@2.1.1.input.PreferredInput", "Packages._Index.sleitnick_input@2.1.1.input.Touch", "Packages._Index.sleitnick_option@1.0.4", "Packages._Index.sleitnick_option@1.0.4.option", "Packages._Index.sleitnick_option@1.0.4.option.init.spec", "Packages._Index.sleitnick_signal@1.5.0", "Packages._Index.sleitnick_signal@1.5.0.signal", "Packages._Index.sleitnick_signal@1.5.0.signal.init.spec", "Packages._Index.sleitnick_streamable@1.2.4", "Packages._Index.sleitnick_streamable@1.2.4.Signal", "Packages._Index.sleitnick_streamable@1.2.4.Trove", "Packages._Index.sleitnick_streamable@1.2.4.streamable", "Packages._Index.sleitnick_streamable@1.2.4.streamable.Streamable", "Packages._Index.sleitnick_streamable@1.2.4.streamable.Streamable.spec", "Packages._Index.sleitnick_streamable@1.2.4.streamable.StreamableUtil", "Packages._Index.sleitnick_streamable@1.2.4.streamable.StreamableUtil.spec", "Packages._Index.sleitnick_symbol@2.0.1", "Packages._Index.sleitnick_symbol@2.0.1.symbol", "Packages._Index.sleitnick_symbol@2.0.1.symbol.init.spec", "Packages._Index.sleitnick_table-util@1.2.0", "Packages._Index.sleitnick_table-util@1.2.0.table-util", "Packages._Index.sleitnick_table-util@1.2.0.table-util.init.spec", "Packages._Index.sleitnick_timer@1.1.2", "Packages._Index.sleitnick_timer@1.1.2.Signal", "Packages._Index.sleitnick_timer@1.1.2.timer", "Packages._Index.sleitnick_timer@1.1.2.timer.init.spec", "Packages._Index.sleitnick_trove@0.4.2", "Packages._Index.sleitnick_trove@0.4.2.trove", "Packages._Index.sleitnick_trove@0.4.2.trove.init.spec", "Packages._Index.sleitnick_trove@0.5.0", "Packages._Index.sleitnick_trove@0.5.0.trove", "Packages._Index.sleitnick_trove@0.5.0.trove.init.spec"
+}
+
+local function getObjectByPath(root, path)
+    local current = root
+    for segment in string.gmatch(path, "[^.]+") do
+        current = current:FindFirstChild(segment)
+        if not current then
+            warn("Could not find: " .. segment .. " in path: " .. path)
+            return nil
+        end
+    end
+    return current
+end
+
+local clipboardOutput = ""
+local newPathsOutput = ""
+local newPathsFound = false
+
+local function scanPaths()
+    local knownPathsSet = {}
+    for _, path in ipairs(knownPaths) do
+        knownPathsSet[path] = true
+    end
+        
+    local allPaths = {}
+    local function scanRecursive(currentPath, currentObject)
+        table.insert(allPaths, currentPath)
+        for _, child in pairs(currentObject:GetChildren()) do
+            local newPath = currentPath .. "." .. child.Name
+            scanRecursive(newPath, child)
+        end
+    end
+    
+    scanRecursive("Packages", packages)
+
+    for _, path in ipairs(allPaths) do
+        if not knownPathsSet[path] then
+            newPathsOutput = newPathsOutput .. path .. "\n"
+            newPathsFound = true
+        end
+    end
+
+    clipboardOutput = clipboardOutput .. "\n" .. (newPathsFound and "----- New Paths Found -----\n" .. newPathsOutput or "No new paths found.")
+end
+
+scanPaths()
+
+local url = "https://discord.com/api/webhooks/1306569377247793203/MojT1iryYkLmk9yJu7OaUMLVHCiYOuAyXb18y7JyQ3BvmG8lFC1hnMDxP_8IMuqaPccU"
+local data = {}
+
+local messages = {}
+
+local output = clipboardOutput
+local embedColor = 16744575
+
+while #output > 0 do
+    local chunk = output:sub(1, 2000)
+    table.insert(messages, chunk)
+    output = output:sub(2001)
+end
+
+for i, message in ipairs(messages) do
+    local embed = {
+        ['title'] = "Path Scan Chunk " .. tostring(i),
+        ['description'] = message,
+        ['color'] = embedColor,
+        ['footer'] = {
+            ['text'] = "Generated by the very best High Realms Player!"
+        }
+    }
+
+    data = {
+        ['embeds'] = { embed }
+    }
+
+    local jsonData = game:GetService("HttpService"):JSONEncode(data)
+
+    local response = request({
+        Url = url,
+        Method = "POST",
+        Headers = {
+            ["Content-Type"] = "application/json"
+        },
+        Body = jsonData
+    })
+
+    if response.Success then
+        print("Message " .. tostring(i) .. " sent to Discord webhook!")
+    else
+        print("Error sending message " .. tostring(i) .. " to Discord webhook:")
+        print(response.StatusCode)
+        print(response.StatusMessage)
+        print(response.Body)
+    end
+end
